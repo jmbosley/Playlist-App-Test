@@ -1,11 +1,9 @@
-Clear instructions for how to programmatically REQUEST data from the microservice you implemented.
-
+# Request
 To REQUEST data, ZEROMQ will be used create a socket of type request, connects and starts sending messages.
-###############
+
+```
 import zmq
-
 context = zmq.Context()
-
 #  Socket to talk to server
 print("Connecting to hello world server…")
 socket = context.socket(zmq.REQ)
@@ -19,13 +17,14 @@ for request in range(10):
     #  Get the reply.
     message = socket.recv()
     print(f"Received reply {request} [ {message} ]")
-###############
+```
+# Receive
 
 Clear instructions for how to programmatically RECEIVE data from the microservice you implemented. Include an example call.
 
 To RECEIVE data, ZEROMQ will be used to create a socket of type response and bind it to a port and then waits for messages.
 If no messages are present the method will block.
-###############
+```
 import zmq
 import time
 
@@ -43,5 +42,4 @@ while True:
 
     #  Send reply back to client
     socket.send(b"World")
-###############
-
+```
