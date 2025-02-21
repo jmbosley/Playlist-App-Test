@@ -43,4 +43,4 @@ while True:
     #  Send reply back to client
     socket.send(b"World")
 ```
-![UML sequence diagram showing how requesting and receiving data works](Sequence Diagram.png)
+![UML sequence diagram showing how requesting and receiving data works](/Sequence_Diagram.png)
