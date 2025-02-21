@@ -43,3 +43,4 @@ while True:
     #  Send reply back to client
     socket.send(b"World")
 ```
+Sequence Diagram.png
