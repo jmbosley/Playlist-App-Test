@@ -5,18 +5,16 @@ To REQUEST data, ZEROMQ will be used create a socket of type request, connects a
 import zmq
 context = zmq.Context()
 #  Socket to talk to server
-print("Connecting to hello world server…")
+context = zmq.Context()
+#  Socket to talk to server
 socket = context.socket(zmq.REQ)
-socket.connect("tcp://localhost:5555")
+socket.connect("tcp://localhost:8000")
 
-#  Do 10 requests, waiting each time for a response
-for request in range(10):
-    print(f"Sending request {request} …")
-    socket.send(b"Hello")
+message = (playlist +":"+ songA +":"+ songB).encode("utf-8")
+socket.send(message)
 
-    #  Get the reply.
-    message = socket.recv()
-    print(f"Received reply {request} [ {message} ]")
+#  Get the reply.
+message = socket.recv()
 ```
 # Receive
 
@@ -30,17 +28,17 @@ import time
 
 context = zmq.Context()
 socket = context.socket(zmq.REP)
-socket.bind("tcp://*:5555")
+socket.bind("tcp://*:8000")
+
 
 while True:
     #  Wait for next request from client
     message = socket.recv()
-    print(f"Received request: {message}")
+    stringMessage = message.decode("utf-8")
+    messageSplit = stringMessage.split(':')
 
-    #  Do some 'work'
-    time.sleep(1)
+    socket.send(b"Complete")
 
-    #  Send reply back to client
-    socket.send(b"World")
+
 ```
 ![UML sequence diagram showing how requesting and receiving data works](/Sequence_Diagram.png)
